@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
+import ActionTypes from '../redux/actions/ActionTypes';
 
 const AddTodoForm = () => {
     const [text, setText] = useState("");
@@ -17,7 +18,7 @@ const AddTodoForm = () => {
             isDone:false,
             date:new Date()
         }
-        dispatch({type:"ADD_TODO",payload:newTodo});
+        dispatch({type:ActionTypes.TODO_EKLE,payload:newTodo});
         setText("")
     }
 
