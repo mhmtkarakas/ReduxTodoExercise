@@ -21,14 +21,33 @@ const ListTodos = () => {
         <>
           {uygulamaState.todosState.todos.map((todo) => (
             <div>
-              <h1>{todo.text}</h1>
+              <h1
+                style={{
+                  textDecoration: todo.isDone ? "line-through" : "none",
+                  color: todo.isDone ? "orangered" : "black",
+                }} //Burada isDone in degisimine textimizin style islemlerini yapiyoruz
+              >
+                {todo.text}
+              </h1>
               <div>
                 <button
-                  onClick={() =>
-                    dispatch({ type: ActionTypes.TODO_SIL, payload: todo.id }) //dispatch islemi yapilarak reducer tetiklenir
+                  onClick={
+                    () =>
+                      dispatch({ type: ActionTypes.TODO_SIL, payload: todo.id }) //dispatch islemi yapilarak reducer tetiklenir
                   }
                 >
                   Sil
+                </button>
+                <button
+                  onClick={
+                    () =>
+                      dispatch({
+                        type: ActionTypes.CHANGE_TODO_DONE,
+                        payload: todo.id,
+                      }) //dispatch islemi yapilarak reducer tetiklenir
+                  }
+                >
+                  {todo.isDone ? "Yapilmadi" : "Yapildi"}
                 </button>
               </div>
               <hr />

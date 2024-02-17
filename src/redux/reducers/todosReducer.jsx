@@ -23,6 +23,23 @@ const todosReducer = (state=initialState, action)=>{
             todos:geciciDizi // Burada geciciDizi yi todos a esitliyoruz
         } // Bu silme islemini tetikleyebilmek icin dispatch islemi yapmamiz gerekir.
     }
+    if(action.type === ActionTypes.CHANGE_TODO_DONE){
+       var geciciDizi = [] 
+        for(let i=0; i<state.todos.length; i++){
+            if(state.todos[i].id === action.payload){
+                var guncelTodo={
+                    ...state.todos[i], // burada yaptigimiz state in icindeki o anki todoslarin hepsini al sadece hasDone i degistir
+                    isDone:!state.todos[i].isDone
+                }
+                  geciciDizi.push(guncelTodo) //guncelTodo geciciDizi ye pushlanir
+            }else{
+                   geciciDizi.push(state.todos[i]) //state in icindeki o anki todos gecici diziye oushlanir
+            }
+        }
+        return{ 
+            todos:geciciDizi //yaptigimiz degisikligi state e yukluyoruz. State guncellenir
+        }
+    }
     return state
 }
 
