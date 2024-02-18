@@ -23,6 +23,7 @@ const todosReducer = (state=initialState, action)=>{
             todos:geciciDizi // Burada geciciDizi yi todos a esitliyoruz
         } // Bu silme islemini tetikleyebilmek icin dispatch islemi yapmamiz gerekir.
     }
+    // TODO_DONE islemi icin reducer yaziyoruz
     if(action.type === ActionTypes.CHANGE_TODO_DONE){
        var geciciDizi = [] 
         for(let i=0; i<state.todos.length; i++){
@@ -39,6 +40,21 @@ const todosReducer = (state=initialState, action)=>{
         return{ 
             todos:geciciDizi //yaptigimiz degisikligi state e yukluyoruz. State guncellenir
         }
+    }
+        // Guncelleme islemi icin reducer yaziyoruz
+        if(action.type === ActionTypes.TODO_GUNCELLE){
+            var geciciDizi = [] 
+             for(let i=0; i<state.todos.length; i++){
+                 if(state.todos[i].id === action.payload.id){
+                    
+                       geciciDizi.push(action.payload) //Burada dispatch islemi ile action.payload ettigimiz guncel todo vardir
+                 }else{
+                        geciciDizi.push(state.todos[i]) //state in icindeki o anki todos gecici diziye oushlanir
+                 }
+             }
+             return{ 
+                 todos:geciciDizi //yaptigimiz degisikligi state e yukluyoruz. State guncellenir
+             }
     }
     return state
 }
